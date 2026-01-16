@@ -46,6 +46,18 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loader">
+            <div class="loader-circle"></div>
+            <div class="loader-text">VS</div>
+        </div>
+    </div>
+
+    <!-- Custom Cursor -->
+    <div class="custom-cursor" id="customCursor"></div>
+    <div class="cursor-follower" id="cursorFollower"></div>
+
     <!-- Navigation -->
     <nav class="navbar" id="navbar">
         <div class="nav-container">
@@ -104,7 +116,19 @@
         </div>
         <div class="hero-bg-animation"></div>
         <canvas id="particlesCanvas" class="particles-canvas"></canvas>
+        
+        <!-- Floating Geometric Shapes -->
+        <div class="floating-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
+            <div class="shape shape-4"></div>
+            <div class="shape shape-5"></div>
+        </div>
     </section>
+
+    <!-- Animated Section Separator -->
+    <div class="section-separator"></div>
 
     <!-- About Section -->
     <section class="about" id="about">
@@ -168,6 +192,9 @@
         </div>
     </section>
 
+    <!-- Animated Section Separator -->
+    <div class="section-separator"></div>
+
     <!-- Projects Section -->
     <section class="projects" id="projects">
         <div class="container">
@@ -228,6 +255,9 @@
             </div>
         </div>
     </section>
+
+    <!-- Animated Section Separator -->
+    <div class="section-separator"></div>
 
     <!-- Contact Section -->
     <section class="contact" id="contact">

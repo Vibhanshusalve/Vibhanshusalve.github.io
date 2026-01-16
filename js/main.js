@@ -165,14 +165,198 @@ window.addEventListener('scroll', () => {
 // LOADING ANIMATION
 // ================================
 
-// Add smooth reveal on page load
+// Remove loading screen after page loads
 window.addEventListener('load', () => {
-    document.body.style.opacity = '0';
+    const loadingScreen = document.getElementById('loadingScreen');
     setTimeout(() => {
-        document.body.style.transition = 'opacity 0.5s ease';
-        document.body.style.opacity = '1';
-    }, 100);
+        loadingScreen.classList.add('hidden');
+        setTimeout(() => {
+            loadingScreen.style.display = 'none';
+        }, 500);
+    }, 1500);
+    
+    // Page fade in is handled after loading screen
+    document.body.style.opacity = '1';
 });
+
+// ================================
+// CUSTOM CURSOR
+// ================================
+
+const customCursor = document.getElementById('customCursor');
+const cursorFollower = document.getElementById('cursorFollower');
+
+if (customCursor && cursorFollower) {
+    let mouseX = 0, mouseY = 0;
+    let followerX = 0, followerY = 0;
+    
+    document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        
+        customCursor.style.left = mouseX + 'px';
+        customCursor.style.top = mouseY + 'px';
+    });
+    
+    // Smooth follower animation
+    function animateFollower() {
+        const dx = mouseX - followerX;
+        const dy = mouseY - followerY;
+        
+        followerX += dx * 0.1;
+        followerY += dy * 0.1;
+        
+        cursorFollower.style.left = followerX + 'px';
+        cursorFollower.style.top = followerY + 'px';
+        
+        requestAnimationFrame(animateFollower);
+    }
+    animateFollower();
+    
+    // Add hover effect on interactive elements
+    const interactiveElements = document.querySelectorAll('a, button, .project-card, .skill-tag, .btn');
+    interactiveElements.forEach(el => {
+        el.addEventListener('mouseenter', () => {
+            customCursor.classList.add('hover');
+        });
+        el.addEventListener('mouseleave', () => {
+            customCursor.classList.remove('hover');
+        });
+    });
+}
+
+// ================================
+// SCROLL PROGRESS INDICATOR
+// ================================
+
+// Create and add scroll progress bar
+const scrollProgress = document.createElement('div');
+scrollProgress.className = 'scroll-progress';
+document.body.appendChild(scrollProgress);
+
+window.addEventListener('scroll', () => {
+    const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const scrolled = (window.scrollY / windowHeight) * 100;
+    scrollProgress.style.width = scrolled + '%';
+});
+
+// ================================
+// ENHANCED SCROLL ANIMATIONS
+// ================================
+
+// Add stagger animation to elements
+const staggerElements = document.querySelectorAll('.skill-tag, .project-card, .contact-item');
+const staggerObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+            setTimeout(() => {
+                entry.target.classList.add('visible');
+                entry.target.style.animationDelay = `${index * 0.1}s`;
+            }, index * 100);
+        }
+    });
+}, {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+});
+
+staggerElements.forEach(el => {
+    staggerObserver.observe(el);
+});
+
+// ================================
+// PARALLAX EFFECT
+// ================================
+
+window.addEventListener('scroll', () => {
+    const scrolled = window.pageYOffset;
+    
+    // Parallax for floating shapes
+    const shapes = document.querySelectorAll('.shape');
+    shapes.forEach((shape, index) => {
+        const speed = (index + 1) * 0.05;
+        shape.style.transform = `translateY(${scrolled * speed}px)`;
+    });
+    
+    // Parallax for hero content
+    const heroContent = document.querySelector('.hero-content');
+    if (heroContent) {
+        heroContent.style.transform = `translateY(${scrolled * 0.3}px)`;
+        heroContent.style.opacity = 1 - (scrolled * 0.002);
+    }
+});
+
+// ================================
+// 3D TILT EFFECT FOR CARDS
+// ================================
+
+const projectCards = document.querySelectorAll('.project-card');
+projectCards.forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        
+        const rotateX = (y - centerY) / 10;
+        const rotateY = (centerX - x) / 10;
+        
+        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-10px)`;
+    });
+    
+    card.addEventListener('mouseleave', () => {
+        card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0)';
+    });
+});
+
+// ================================
+// TEXT REVEAL ANIMATION
+// ================================
+
+function wrapTextInSpans(element) {
+    const text = element.textContent;
+    const words = text.split(' ');
+    element.innerHTML = '';
+    
+    words.forEach((word, index) => {
+        const span = document.createElement('span');
+        span.textContent = word + (index < words.length - 1 ? ' ' : '');
+        span.style.animationDelay = `${index * 0.1}s`;
+        element.appendChild(span);
+    });
+}
+
+// Apply to section titles
+const sectionTitles = document.querySelectorAll('.section-title');
+const textRevealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting && !entry.target.classList.contains('text-reveal')) {
+            entry.target.classList.add('text-reveal');
+            wrapTextInSpans(entry.target);
+        }
+    });
+}, {
+    threshold: 0.5
+});
+
+sectionTitles.forEach(title => {
+    textRevealObserver.observe(title);
+});
+
+// ================================
+// RIPPLE EFFECT ON BUTTONS
+// ================================
+
+const buttons = document.querySelectorAll('.btn, .project-link, .social-link');
+buttons.forEach(button => {
+    button.classList.add('ripple');
+});
+
+// ================================
+// ENHANCED TYPING EFFECT
+// ================================
 
 // ================================
 // SKILL TAGS ANIMATION
