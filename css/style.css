@@ -303,8 +303,10 @@ ul {
     left: 0;
     width: 100%;
     height: 100%;
-    background: radial-gradient(circle at 20% 50%, rgba(0, 212, 255, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(168, 85, 247, 0.1) 0%, transparent 50%);
+    background: 
+        radial-gradient(circle at 20% 50%, rgba(0, 212, 255, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(168, 85, 247, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 40% 20%, rgba(168, 85, 247, 0.1) 0%, transparent 40%);
     animation: bg-float 10s ease-in-out infinite;
     z-index: 1;
 }
@@ -318,11 +320,36 @@ ul {
     }
 }
 
+/* Particles Canvas */
+.particles-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+}
+
 /* ================================
    ABOUT SECTION
    ================================ */
 .about {
-    background: var(--bg-secondary);
+    background: linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+    position: relative;
+}
+
+.about::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 10% 20%, rgba(0, 212, 255, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 90% 80%, rgba(168, 85, 247, 0.05) 0%, transparent 50%);
+    pointer-events: none;
 }
 
 .about-grid {
@@ -421,6 +448,22 @@ ul {
 /* ================================
    PROJECTS SECTION
    ================================ */
+.projects {
+    background: linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+    position: relative;
+}
+
+.projects::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 50% 50%, rgba(0, 212, 255, 0.03) 0%, transparent 70%);
+    pointer-events: none;
+}
 .section-subtitle {
     text-align: center;
     color: var(--text-secondary);
@@ -511,6 +554,7 @@ ul {
     align-items: center;
     gap: 0.5rem;
     transition: var(--transition-fast);
+    padding: 0.5rem 0;
 }
 
 .project-link:hover {
@@ -521,6 +565,12 @@ ul {
 .project-link svg {
     width: 16px;
     height: 16px;
+}
+
+.project-links {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
 }
 
 /* Coming Soon Card */
@@ -558,7 +608,20 @@ ul {
    CONTACT SECTION
    ================================ */
 .contact {
-    background: var(--bg-secondary);
+    background: linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+    position: relative;
+}
+
+.contact::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 30% 40%, rgba(168, 85, 247, 0.08) 0%, transparent 50%);
+    pointer-events: none;
 }
 
 .contact-content {

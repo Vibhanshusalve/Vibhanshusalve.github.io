@@ -59,7 +59,7 @@
                 <h1 class="hero-name">
                     <span class="gradient-text">Vibhanshu Salve</span>
                 </h1>
-                <p class="hero-title">Student & Aspiring ML Engineer</p>
+                <p class="hero-title" id="typingText">Student & Aspiring ML Engineer</p>
                 <p class="hero-description">
                     16-year-old passionate about machine learning and open source
                 </p>
@@ -80,6 +80,7 @@
             </div>
         </div>
         <div class="hero-bg-animation"></div>
+        <canvas id="particlesCanvas" class="particles-canvas"></canvas>
     </section>
 
     <!-- About Section -->
@@ -154,27 +155,39 @@
                 <!-- Project 1: Ladybird -->
                 <div class="project-card">
                     <div class="project-image">
-                        <img src="images/ladybird-preview.png" alt="Ladybird Browser Project">
+                        <img src="https://ladybird.org/assets/img/about.webp" alt="Ladybird Browser Project" crossorigin="anonymous">
                     </div>
                     <div class="project-content">
                         <h3 class="project-title">Ladybird Browser Contribution</h3>
                         <p class="project-description">
-                            Contributing to the Ladybird open-source browser project, a truly 
-                            independent web browser built from scratch. Engaging with a vibrant 
-                            community of developers working on the future of web browsing.
+                            Contributing to Ladybird, a truly independent web browser built from scratch.
+                            Driven by a web standards first approach, Ladybird aims to render the modern web
+                            with good performance, stability and security. Engaging with a vibrant community
+                            of developers working on the future of web browsing.
                         </p>
                         <div class="project-tech">
                             <span class="tech-badge">C++</span>
+                            <span class="tech-badge">Web Standards</span>
                             <span class="tech-badge">Open Source</span>
                         </div>
-                        <a href="https://github.com/Vibhanshusalve/ladybird" target="_blank" rel="noopener noreferrer" class="project-link">
-                            View on GitHub
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
-                                <polyline points="15 3 21 3 21 9"/>
-                                <line x1="10" y1="14" x2="21" y2="3"/>
-                            </svg>
-                        </a>
+                        <div class="project-links">
+                            <a href="https://github.com/Vibhanshusalve/ladybird" target="_blank" rel="noopener noreferrer" class="project-link">
+                                View on GitHub
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                                    <polyline points="15 3 21 3 21 9"/>
+                                    <line x1="10" y1="14" x2="21" y2="3"/>
+                                </svg>
+                            </a>
+                            <a href="https://ladybird.org" target="_blank" rel="noopener noreferrer" class="project-link">
+                                Official Site
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                                    <polyline points="15 3 21 3 21 9"/>
+                                    <line x1="10" y1="14" x2="21" y2="3"/>
+                                </svg>
+                            </a>
+                        </div>
                     </div>
                 </div>
 
