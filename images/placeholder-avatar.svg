@@ -1,0 +1,22 @@
+<svg width="280" height="280" viewBox="0 0 280 280" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background Circle -->
+  <circle cx="140" cy="140" r="140" fill="#2a2a2a"/>
+  
+  <!-- Gradient Definition -->
+  <defs>
+    <linearGradient id="avatarGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00d4ff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#a855f7;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- User Icon -->
+  <circle cx="140" cy="105" r="45" fill="url(#avatarGradient)"/>
+  <path d="M70 220 Q70 160 140 160 Q210 160 210 220" fill="url(#avatarGradient)"/>
+  
+  <!-- Decorative Elements -->
+  <circle cx="60" cy="60" r="8" fill="#00d4ff" opacity="0.3"/>
+  <circle cx="220" cy="80" r="6" fill="#a855f7" opacity="0.3"/>
+  <circle cx="200" cy="220" r="10" fill="#00d4ff" opacity="0.2"/>
+  <circle cx="80" cy="200" r="7" fill="#a855f7" opacity="0.3"/>
+</svg>
