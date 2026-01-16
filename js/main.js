@@ -165,29 +165,10 @@ window.addEventListener('scroll', () => {
 // LOADING ANIMATION
 // ================================
 
-// Remove loading screen after page loads
+// Page ready
 window.addEventListener('load', () => {
-    const loadingScreen = document.getElementById('loadingScreen');
-    if (loadingScreen) {
-        setTimeout(() => {
-            loadingScreen.classList.add('hidden');
-            setTimeout(() => {
-                loadingScreen.style.display = 'none';
-            }, 300);
-        }, 800);
-    }
-    
-    // Page fade in is handled after loading screen
     document.body.style.opacity = '1';
 });
-
-// Fallback: Remove loading screen after 3 seconds no matter what
-setTimeout(() => {
-    const loadingScreen = document.getElementById('loadingScreen');
-    if (loadingScreen) {
-        loadingScreen.style.display = 'none';
-    }
-}, 3000);
 
 // ================================
 // CUSTOM CURSOR
