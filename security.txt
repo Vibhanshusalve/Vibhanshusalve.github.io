@@ -1,0 +1,4 @@
+Contact: mailto:salvevibhanshu@proton.me
+Preferred-Languages: en
+Canonical: https://vibhanshusalve.github.io/.well-known/security.txt
+Policy: https://vibhanshusalve.github.io/SECURITY.md

@@ -1,0 +1,17 @@
+# Security Headers Configuration
+# Note: GitHub Pages has limited support for custom headers
+# For full header control, consider deploying to Netlify/Vercel
+
+/*
+  # Security Headers
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  X-XSS-Protection: 1; mode=block
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: geolocation=(), microphone=(), camera=()
+  
+  # Content Security Policy
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' https: data:; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self';
+  
+  # HTTPS Enforcement (GitHub Pages already does this)
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
