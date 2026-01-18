@@ -254,6 +254,7 @@ setTimeout(() => {
 const canvas = document.getElementById('particlesCanvas');
 if (canvas) {
     const ctx = canvas.getContext('2d');
+    const heroSection = document.getElementById('home');
     
     // Mouse tracking
     const mouse = {
@@ -262,15 +263,15 @@ if (canvas) {
         radius: 150 // Attraction radius
     };
     
-    // Track mouse position relative to canvas
-    canvas.addEventListener('mousemove', (e) => {
+    // Track mouse position on hero section (works even with pointer-events: none on canvas)
+    heroSection.addEventListener('mousemove', (e) => {
         const rect = canvas.getBoundingClientRect();
         mouse.x = e.clientX - rect.left;
         mouse.y = e.clientY - rect.top;
     });
     
-    // Reset mouse position when leaving canvas
-    canvas.addEventListener('mouseleave', () => {
+    // Reset mouse position when leaving hero section
+    heroSection.addEventListener('mouseleave', () => {
         mouse.x = null;
         mouse.y = null;
     });
