@@ -248,12 +248,32 @@ setTimeout(() => {
 }, 1000);
 
 // ================================
-// PARTICLE ANIMATION
+// PARTICLE ANIMATION WITH CURSOR FOLLOW
 // ================================
 
 const canvas = document.getElementById('particlesCanvas');
 if (canvas) {
     const ctx = canvas.getContext('2d');
+    
+    // Mouse tracking
+    const mouse = {
+        x: null,
+        y: null,
+        radius: 150 // Attraction radius
+    };
+    
+    // Track mouse position relative to canvas
+    canvas.addEventListener('mousemove', (e) => {
+        const rect = canvas.getBoundingClientRect();
+        mouse.x = e.clientX - rect.left;
+        mouse.y = e.clientY - rect.top;
+    });
+    
+    // Reset mouse position when leaving canvas
+    canvas.addEventListener('mouseleave', () => {
+        mouse.x = null;
+        mouse.y = null;
+    });
     
     // Set canvas size
     function resizeCanvas() {
@@ -269,8 +289,10 @@ if (canvas) {
             this.x = Math.random() * canvas.width;
             this.y = Math.random() * canvas.height;
             this.size = Math.random() * 2 + 1;
-            this.speedX = (Math.random() - 0.5) * 0.5;
-            this.speedY = (Math.random() - 0.5) * 0.5;
+            this.baseSpeedX = (Math.random() - 0.5) * 0.5;
+            this.baseSpeedY = (Math.random() - 0.5) * 0.5;
+            this.speedX = this.baseSpeedX;
+            this.speedY = this.baseSpeedY;
             this.opacity = Math.random() * 0.5 + 0.2;
             
             // Random color between cyan and purple
@@ -279,6 +301,31 @@ if (canvas) {
         }
         
         update() {
+            // Cursor attraction
+            if (mouse.x !== null && mouse.y !== null) {
+                const dx = mouse.x - this.x;
+                const dy = mouse.y - this.y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                
+                if (distance < mouse.radius) {
+                    // Calculate attraction force (stronger when closer)
+                    const force = (mouse.radius - distance) / mouse.radius;
+                    const attractionStrength = 0.8;
+                    
+                    // Move towards cursor
+                    this.speedX = this.baseSpeedX + (dx / distance) * force * attractionStrength;
+                    this.speedY = this.baseSpeedY + (dy / distance) * force * attractionStrength;
+                } else {
+                    // Gradually return to base speed
+                    this.speedX += (this.baseSpeedX - this.speedX) * 0.05;
+                    this.speedY += (this.baseSpeedY - this.speedY) * 0.05;
+                }
+            } else {
+                // Return to base speed when mouse leaves
+                this.speedX += (this.baseSpeedX - this.speedX) * 0.05;
+                this.speedY += (this.baseSpeedY - this.speedY) * 0.05;
+            }
+            
             this.x += this.speedX;
             this.y += this.speedY;
             
@@ -316,7 +363,7 @@ if (canvas) {
             particle.draw();
         });
         
-        // Draw connections
+        // Draw connections between particles
         particles.forEach((p1, i) => {
             particles.slice(i + 1).forEach(p2 => {
                 const dx = p1.x - p2.x;
@@ -335,6 +382,35 @@ if (canvas) {
                 }
             });
         });
+        
+        // Draw connections from cursor to nearby particles
+        if (mouse.x !== null && mouse.y !== null) {
+            particles.forEach(particle => {
+                const dx = mouse.x - particle.x;
+                const dy = mouse.y - particle.y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                
+                if (distance < mouse.radius) {
+                    ctx.strokeStyle = '#a855f7'; // Purple lines to cursor
+                    ctx.globalAlpha = (1 - distance / mouse.radius) * 0.5;
+                    ctx.lineWidth = 1;
+                    ctx.beginPath();
+                    ctx.moveTo(particle.x, particle.y);
+                    ctx.lineTo(mouse.x, mouse.y);
+                    ctx.stroke();
+                    ctx.globalAlpha = 1;
+                }
+            });
+            
+            // Draw cursor glow
+            const gradient = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, 30);
+            gradient.addColorStop(0, 'rgba(168, 85, 247, 0.3)');
+            gradient.addColorStop(1, 'rgba(168, 85, 247, 0)');
+            ctx.fillStyle = gradient;
+            ctx.beginPath();
+            ctx.arc(mouse.x, mouse.y, 30, 0, Math.PI * 2);
+            ctx.fill();
+        }
         
         requestAnimationFrame(animate);
     }
