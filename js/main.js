@@ -263,17 +263,20 @@ if (canvas) {
         radius: 150 // Attraction radius
     };
     
-    // Track mouse position on hero section (works even with pointer-events: none on canvas)
-    heroSection.addEventListener('mousemove', (e) => {
-        const rect = canvas.getBoundingClientRect();
-        mouse.x = e.clientX - rect.left;
-        mouse.y = e.clientY - rect.top;
-    });
-    
-    // Reset mouse position when leaving hero section
-    heroSection.addEventListener('mouseleave', () => {
-        mouse.x = null;
-        mouse.y = null;
+    // Track mouse position on entire document, but only use when over hero
+    document.addEventListener('mousemove', (e) => {
+        const heroRect = heroSection.getBoundingClientRect();
+        const canvasRect = canvas.getBoundingClientRect();
+        
+        // Check if mouse is over hero section
+        if (e.clientY >= heroRect.top && e.clientY <= heroRect.bottom &&
+            e.clientX >= heroRect.left && e.clientX <= heroRect.right) {
+            mouse.x = e.clientX - canvasRect.left;
+            mouse.y = e.clientY - canvasRect.top;
+        } else {
+            mouse.x = null;
+            mouse.y = null;
+        }
     });
     
     // Set canvas size
